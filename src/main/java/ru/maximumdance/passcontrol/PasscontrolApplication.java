@@ -15,11 +15,12 @@ public class PasscontrolApplication {
 		ApplicationContext context = SpringApplication.run(PasscontrolApplication.class, args);
 		PersonService service =context.getBean(PersonService.class);
 
+
 		Person person = new Person();
 		person.setFirstName("Сталь");
 		person.setLastName("Александр");
 		service.insert(person);
-
+/*
 		Integer id = service.findByFirstName("Сталь").get(0).getId();
 
 		System.out.println("ID " +id);
@@ -30,6 +31,7 @@ public class PasscontrolApplication {
 
 		service.addPass(id, pass);
 		System.out.println(service.findByFirstName("Сталь").get(0).getPasses().size());
+	*/
 	}
 
 }

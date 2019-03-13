@@ -24,10 +24,11 @@ public class PersonController {
          personService.insert(person);
     }
 
-/*
+
     @GetMapping("/{id}")
-    public void Person findById(Integer id){
-        personService.
+    public  Person findById(@PathVariable Integer id){
+        System.out.println("id " + id);
+        return personService.findById(id);
     }
-*/
+
 }

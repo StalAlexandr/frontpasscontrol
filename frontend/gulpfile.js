@@ -13,10 +13,22 @@ var gulp = require('gulp'),
     rimraf = require('rimraf'),
     browserSync = require("browser-sync"),
     replace = require('gulp-replace'),
+    webserver = require('gulp-webserver'),
     path = require('path'),
     reload = browserSync.reload;
   
-    var URL = 'http://www.whatever.com/api';
+    var URL = 'http://localhost:8080';
+    
+    var config = {
+    server: {
+        baseDir: "./build"
+    },
+    tunnel: true,
+    host: 'localhost',
+    port: 9000,
+    logPrefix: "Frontend_Devil"
+};
+    
     
 var configpath = {
     build: { //Тут мы укажем куда складывать готовые после сборки файлы
@@ -28,8 +40,8 @@ var configpath = {
     },
     src: { //Пути откуда брать исходники
         html: 'src/*.html', //Синтаксис src/*.html говорит gulp что мы хотим взять все файлы с расширением .html
-        js: 'src/js/',//В стилях и скриптах нам понадобятся только main файлы
-        style: 'src/style/main.scss',
+        js: 'src/js/',
+        css: 'src/css/',
         img: 'src/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
         fonts: 'src/fonts/**/*.*'
     },
@@ -55,10 +67,15 @@ gulp.task('html:build', function (build) {
     
     gulp.src(path.join(configpath.src.js, '**/*.js'))
     //    .pipe(jsmin())
-        .pipe(replace('http://localhost:9000/api', URL))
+        .pipe(replace('http://localhost:8080', URL))
         .pipe(gulp.dest(configpath.build.js))
     
-     gulp.src(configpath.src.html) //Выберем файлы по нужному пути
+    gulp.src(path.join(configpath.src.css, '**/*.css'))
+    //    .pipe(jsmin())
+        .pipe(replace('http://localhost:9000/api', URL))
+        .pipe(gulp.dest(configpath.build.css))
+        
+        gulp.src(configpath.src.html) //Выберем файлы по нужному пути
         .pipe(rigger()) //Прогоним через rigger
         .pipe(gulp.dest(configpath.build.html)) //Выплюнем их в папку build
         .pipe(reload({stream: true})); //И перезагрузим наш сервер для обновлений
@@ -67,3 +84,10 @@ gulp.task('html:build', function (build) {
        
          
 });
+
+
+gulp.task('webserver', function (server) {
+    browserSync(config);
+    server();
+});
+
