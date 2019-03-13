@@ -1,0 +1,59 @@
+#stdnetwork {
+    height: 500pt;
+    width: 300pt;
+    background-color: antiquewhite;
+    border: 1px solid lightgray;
+}
+
+#info {
+    height: 500pt;
+    width: 600pt;
+    background-color: burlywood;
+    border: 1px solid lightgray;
+}
+
+.appsearch {
+    height: 50pt;
+    width: 600pt;
+    background-color: cornsilk;
+    border: 1px solid lightgray;
+}
+
+.operation {
+    height: 50pt;
+    width: 600pt;
+    background-color: cornsilk;
+    border: 1px solid lightgray;
+}
+
+.documents {
+    height: 150pt;
+    width: 600pt;
+    background-color: cornsilk;
+    border: 1px solid lightgray;
+}
+
+.letters {
+    height: 150pt;
+    width: 600pt;
+    background-color: cornsilk;
+    border: 1px solid lightgray;
+}
+
+.controlpanel {
+    height: 50pt;
+    width: 600pt;
+    background-color: cornsilk;
+    border: 1px solid lightgray;
+}
+
+.title {
+    font-weight: bold;
+    height: 20pt;;
+    background-color: burlywood;
+    text-align: center;
+}
+
+.localtitle {
+    font-weight: bold;
+}

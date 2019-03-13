@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<script src="./js/lib/angular.min.js"></script>
+<script src="./js/lib/vis.js"></script>
+<script src="./js/controller.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="./css/main.css">
+
+
+<body>
+<div class="title">
+    <span>Информационная система "Абониментик"</span>
+</div>
+<div ng-init='init()' ng-app="myApp" ng-controller="myCtrl">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="usrsearch">
+                                    <br>
+                                    <input placeholder="Введите фамилию или номер (через # или №)" ng-model="selectedUser" size="10"><br>
+                                        <button ng-click="getUser()" ng-show="selectedUser.length>0">НАЙТИ</button><br>
+									 <button ng-click="addUser()" ng-show="selectedUser.length>0">НОВЫЙ</button><br>
+                                    {{user.name}}
+                                </div>
+                            </td>
+							<td>
+                                <div class="user">
+                                    <div class = "localtitle">Номер карточки: {{selectedUser.name}} </div>
+									<div class = "localtitle">Фамилия: {{selectedUser.name}} </div>
+									<div class = "localtitle">Имя: {{selectedUser.name}} </div>
+									<div class = "localtitle">Отчество: {{selectedUser.name}} </div>
+									<div class = "localtitle">Телефон: {{selectedUser.name}} </div>
+									<button ng-click="addUser()" ng-show="selectedUser.length>0">СОХРАНИТЬ</button><br>
+									  <div class = "localtitle">Абонименты: 
+									   <div></div>
+								       <div></div>
+									  </div>
+                                </div>
+                            </td>
+								<td>
+                                <div class="user">
+                                    <div class = "localtitle">Курс: {{selectedUser.name}} </div>
+									<div class = "localtitle">С: {{selectedUser.name}} По: {{selectedUser.name}} </div>
+									<div class = "localtitle">Число занятий: {{selectedUser.name}} </div>
+									<button ng-click="addUser()" ng-show="selectedUser.length>0">ДОБАВИТЬ АБОНИМЕНТ</button><br>
+									
+                                </div>
+                            </td>
+                        </tr>
+				       <tr>
+						    <td>
+								<button ng-click="addWorkout()" ng-show="selectedUser.length>0">Списать занятие: </button> Курс Дата Время<br> 
+                                <div class="usrsearch">
+                                   История посещений:
+                                </div>
+									<button ng-click="addUser()" ng-show="selectedUser.length>0">СТЕРЕТЬ АБОНИМЕНТ</button><br>
+                            </td>
+	       			   </tr>
+                       
+                  
+                  </table>
+</div>
+        
+
+</body>
+</html>
