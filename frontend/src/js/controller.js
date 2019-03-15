@@ -52,6 +52,23 @@ app.controller('myCtrl', function ($scope, $http, $element) {
             $scope.currentPerson =  $scope.personList[0];
 
         });
+    };
+
+    $scope.updatePerson = function(){
+
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        $http.put('http://localhost:8080/persons/', JSON.stringify($scope.currentPerson ), {headers: headers});
+    };
+
+    $scope.addPerson = function(){
+
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        $scope.currentPerson.id='';
+        $http.post('http://localhost:8080/persons/', JSON.stringify($scope.currentPerson ), {headers: headers});
+        alert(2);
+
     }
 
 });

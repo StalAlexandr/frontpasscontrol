@@ -127,4 +127,19 @@ public class Person {
         pass.setPerson(this);
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", cardNumber=" + cardNumber +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", midName='" + midName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", comment='" + comment + '\'' +
+                ", birthDate=" + birthDate +
+                ", regDate=" + regDate +
+                ", passes=" + passes +
+                '}';
+    }
 }

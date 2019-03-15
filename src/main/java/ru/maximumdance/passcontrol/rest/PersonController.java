@@ -20,15 +20,20 @@ public class PersonController {
         return personService.getAll();
     }
 
+    @PutMapping("/")
+    public void update(@RequestBody Person person){
+         personService.update(person);
+    }
+
+
     @PostMapping("/")
-    public void insert(Person person){
-         personService.insert(person);
+    public void insert(@RequestBody Person person){
+        personService.insert(person);
     }
 
 
     @GetMapping("/{id}")
     public  Person findById(@PathVariable Integer id){
-        System.out.println("id " + id);
         return personService.findById(id);
     }
 

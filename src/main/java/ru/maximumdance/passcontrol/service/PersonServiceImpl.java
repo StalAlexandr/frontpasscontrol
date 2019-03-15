@@ -25,6 +25,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public void update(Person person) {
+        personDAO.update(person);
+    }
+
+    @Override
     public List<Person> getAll() {
         return personDAO.getAll();
     }

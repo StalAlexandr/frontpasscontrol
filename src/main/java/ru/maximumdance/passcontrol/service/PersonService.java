@@ -10,6 +10,8 @@ public interface PersonService {
 
     void insert(Person person);
 
+    void update(Person person);
+
     List<Person> getAll();
 
     Person findById(Integer id);

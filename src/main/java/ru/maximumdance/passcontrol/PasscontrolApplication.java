@@ -17,16 +17,16 @@ public class PasscontrolApplication {
 
 
 		Person person = new Person();
-		person.setFirstName("Сталь");
+		person.setLastName("Сталь");
 		person.setCardNumber(123);
-		person.setLastName("Александр");
+		person.setFirstName("Александр");
 		service.insert(person);
 
 
 		Person person2 = new Person();
-		person2.setFirstName("Сталь");
+		person2.setLastName("Сталь");
 		person2.setCardNumber(321);
-		person2.setLastName("Николай");
+		person2.setFirstName("Николай");
 		service.insert(person2);
 
 /*

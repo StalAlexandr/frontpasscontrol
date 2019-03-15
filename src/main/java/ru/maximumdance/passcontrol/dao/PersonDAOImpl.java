@@ -25,7 +25,12 @@ public class PersonDAOImpl {
     }
 
     public void insert(Person person){
+        System.out.println(person);
         entityManager.persist(person);
+    }
+
+    public void update(Person person){
+        entityManager.merge(person);
     }
 
     public void delete(Person person){
@@ -75,7 +80,7 @@ public class PersonDAOImpl {
         Root<Person> from = criteria.from(Person.class);
         criteria.select(from);
 
-        criteria.where(builder.like(from.get("firstName"), builder.parameter(String.class, "likeCondition")));
+        criteria.where(builder.like(from.get("lastName"), builder.parameter(String.class, "likeCondition")));
 
         TypedQuery<Person> typed = entityManager.createQuery(criteria);
         typed.setParameter("likeCondition", name+"%");
