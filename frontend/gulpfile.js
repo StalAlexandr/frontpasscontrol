@@ -91,3 +91,7 @@ gulp.task('webserver', function (server) {
     server();
 });
 
+
+gulp.task('watch', function(){
+  gulp.watch('./src/**', gulp.series('html:build'));
+});
