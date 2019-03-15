@@ -2,9 +2,12 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function ($scope, $http, $element) {
 
 
+
+
     $scope.personList = [];
 
     $scope.currentPerson = {};
+
 
     $scope.searchString = '';
 
@@ -12,7 +15,6 @@ app.controller('myCtrl', function ($scope, $http, $element) {
 
     $scope.search = function () {
 
-        $scope.current = 'Ф';
         $scope.currentPerson='';
         $scope.personList = [];
 
@@ -67,9 +69,11 @@ app.controller('myCtrl', function ($scope, $http, $element) {
         headers.append('Content-Type', 'application/json');
         $scope.currentPerson.id='';
         $http.post('http://localhost:8080/persons/', JSON.stringify($scope.currentPerson ), {headers: headers});
-        alert(2);
+
 
     }
-
+    $scope.validPerson = function() {
+       return (($scope.currentPerson.cardNumber)&&($scope.currentPerson.lastName)&&($scope.currentPerson.cardNumber.length > 0)&&($scope.currentPerson.lastName.length>0));
+    }
 });
 

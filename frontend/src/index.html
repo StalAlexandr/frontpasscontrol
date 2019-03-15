@@ -23,7 +23,8 @@
                                             <div class="usrsearch">
                                                 <input placeholder="Фамилия или номер" ng-model="searchString"
                                                        size="25">
-                                                <button ng-click="search()">НАЙТИ</button>
+                                                <button ng-click="search()" ng-disabled="searchString.length==0">НАЙТИ
+                                                </button>
 
                                             </div>
                                         </td>
@@ -45,6 +46,8 @@
 							<td>
                                 <div class=" user">
                                                     <table>
+                                                        <button ng-click="updatePerson()" ng-disabled = "!validPerson()">Сохранить</button>
+                                                        <button ng-click="addPerson()" ng-disabled = "!validPerson()">Создать</button>
                                                         <tr>
                                                             <td><span>Карточка: </span></td>
                                                             <td><input placeholder="Карточка" ng-model="currentPerson.cardNumber" size="30"></td>
@@ -76,6 +79,7 @@
                                                             <td><span>Комментарий: </span></td>
                                                             <td><input placeholder="Комментарий" ng-model="currentPerson.comment" size="30"></td>
                                                         </tr>
+                                                        <!--
                                                         <tr>
                                                             <td><span>Дата рождения: </span></td>
                                                             <td><input placeholder="Дата рождения" ng-model="currentPerson.birthDate" size="30"></td>
@@ -84,9 +88,9 @@
                                                             <td><span>Дата регистрации: </span></td>
                                                             <td><input placeholder="Дата регистрации" ng-model="currentPerson.regDate" size="30"></td>
                                                         </tr>
-                                                        <button ng-click="updatePerson()">Сохранить</button>
-                                                        <button ng-click="addPerson()">Создать</button>
-                                                        <br>
+                                                        -->
+
+
                                                     </table>
 
 
@@ -106,7 +110,7 @@
 
                                             </div>
                                         </td>
-                                    </tr>
+                       </tr>
 				       <tr>
 						    <td>
 								<button ng-click="addWorkout()" ng-show="selectedUser.length>0">Списать занятие: </button> Курс Дата Время<br> 
