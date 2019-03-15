@@ -6,6 +6,7 @@ import ru.maximumdance.passcontrol.model.Person;
 import ru.maximumdance.passcontrol.service.PersonService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/persons")
@@ -29,6 +30,18 @@ public class PersonController {
     public  Person findById(@PathVariable Integer id){
         System.out.println("id " + id);
         return personService.findById(id);
+    }
+
+
+    @GetMapping("/select")
+    public  Person find(@RequestParam Map<String,String> params){
+
+        return personService.find(params);
+    }
+
+    @GetMapping("/selectByName/{name}")
+    public  List<Person> findByName(@PathVariable String name){
+        return personService.findByNameLike(name);
     }
 
 }

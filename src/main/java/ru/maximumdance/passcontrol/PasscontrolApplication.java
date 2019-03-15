@@ -18,8 +18,17 @@ public class PasscontrolApplication {
 
 		Person person = new Person();
 		person.setFirstName("Сталь");
+		person.setCardNumber(123);
 		person.setLastName("Александр");
 		service.insert(person);
+
+
+		Person person2 = new Person();
+		person2.setFirstName("Сталь");
+		person2.setCardNumber(321);
+		person2.setLastName("Николай");
+		service.insert(person2);
+
 /*
 		Integer id = service.findByFirstName("Сталь").get(0).getId();
 

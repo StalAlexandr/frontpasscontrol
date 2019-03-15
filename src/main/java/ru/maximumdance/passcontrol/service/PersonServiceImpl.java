@@ -9,6 +9,7 @@ import ru.maximumdance.passcontrol.model.Person;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 
 @Transactional
 @Service
@@ -28,15 +29,6 @@ public class PersonServiceImpl implements PersonService {
         return personDAO.getAll();
     }
 
-    @Override
-    public List<Person> findByFirstName(String firstName) {
-        return personDAO.findByFirstName(firstName);
-    }
-
-    @Override
-    public Person findByCardNumber(String cardNumber) {
-        return personDAO.findByCardNumber(cardNumber);
-    }
 
     @Override
     public Person findById(Integer id) {
@@ -46,6 +38,16 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void addPass(Integer id, Pass pass) {
         personDAO.addPass(id,pass);
+    }
+
+    @Override
+    public Person find(Map<String, String> params) {
+        return personDAO.find(params);
+    }
+
+    @Override
+    public List<Person>findByNameLike(String firstName) {
+        return personDAO.findByNameLike(firstName);
     }
 
 

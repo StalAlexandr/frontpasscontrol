@@ -5,12 +5,14 @@ import ru.maximumdance.passcontrol.model.Pass;
 import ru.maximumdance.passcontrol.model.Person;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PersonDAOImpl {
@@ -40,18 +42,6 @@ public class PersonDAOImpl {
         return allQuery.getResultList();
     }
 
-    public List<Person> findByFirstName(String name){
-        TypedQuery<Person> q = entityManager.createQuery("SELECT person FROM Person person WHERE person.firstName  = :name ORDER BY id DESC",Person.class);
-        q.setParameter("name", name);
-        return q.getResultList();
-    }
-
-    public Person findByCardNumber(String cardNumber){
-        TypedQuery<Person> q = entityManager.createQuery("SELECT person FROM Person person WHERE person.cardNumber  = :cardNumber ORDER BY id DESC",Person.class);
-        q.setParameter("cardNumber", cardNumber);
-        return q.getSingleResult();
-    };
-
     public Person findById(Integer id){
         return entityManager.find(Person.class, id);
     };
@@ -60,8 +50,36 @@ public class PersonDAOImpl {
         Person person = findById(id);
         person.addPass(pass);
         entityManager.persist(pass);
+    }
 
+    public Person find(Map<String,String> params) {
 
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Person> criteria = builder.createQuery(Person.class);
+        Root<Person> from = criteria.from(Person.class);
+        criteria.select(from);
+        params.forEach((key, value) -> criteria.where(builder.equal(from.get(key), value)));
+
+        TypedQuery<Person> typed = entityManager.createQuery(criteria);
+        try {
+            return typed.getSingleResult();
+        } catch (final NoResultException nre) {
+            return null;
+        }
+    }
+
+    public List<Person> findByNameLike(String name) {
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Person> criteria = builder.createQuery(Person.class);
+        Root<Person> from = criteria.from(Person.class);
+        criteria.select(from);
+
+        criteria.where(builder.like(from.get("firstName"), builder.parameter(String.class, "likeCondition")));
+
+        TypedQuery<Person> typed = entityManager.createQuery(criteria);
+        typed.setParameter("likeCondition", name+"%");
+        return typed.getResultList();
     }
 
 }
