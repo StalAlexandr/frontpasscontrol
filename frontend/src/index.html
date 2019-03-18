@@ -103,10 +103,77 @@
                                         </td>
                                         <td>
                                             <div class="user">
-                                                <div class = "localtitle">Курс: {{selectedUser.name}} </div>
-                                                <div class = "localtitle">С: {{selectedUser.name}} По: {{selectedUser.name}} </div>
-                                                <div class = "localtitle">Число занятий: {{selectedUser.name}} </div>
-                                                <button ng-click="addUser()" ng-show="selectedUser.length>0">ДОБАВИТЬ АБОНИМЕНТ</button><br>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <span>Курс: </span>
+                                                        </td>
+                                                        <td>
+                                                            <select  size="1" >
+                                                                <option>ЛАТИНА</option>
+                                                                <option>БАЗОВЫЙ</option>
+                                                                <option>БОДИАРТ</option>
+                                                                <option>ЙОГА</option>
+                                                                <option>ТАНГО</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <span>Число занятий: </span>
+                                                        </td>
+                                                        <td>
+                                                            <select  size="1" >
+                                                                <option>1</option>
+                                                                <option>4</option>
+                                                                <option>8</option>
+                                                                <option>12</option>
+                                                                <option>16</option>
+                                                                <option>БЕЗЛИМИТ</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span>С: </span>
+                                                        </td>
+                                                        <md-content ng-app="MyApp" ng-controller="AppCtrl as ctrl" layout-padding layout-margin>
+                                                            <md-datepicker ng-model="ctrl.myDate" ng-change="ctrl.onDateChanged()"
+                                                                           md-placeholder="Enter date"></md-datepicker>
+                                                            Date: {{ctrl.myDate | date:shortDate}}
+                                                        </md-content>
+                                                        <td>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span>По: </span>
+                                                        </td>
+                                                        <td>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span>Добавить: </span>
+                                                        </td>
+                                                        <td>
+                                                            <button ng-click="addPass()">Добавить</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    </tr>
+
+
+
+                                                </table>
 
                                             </div>
                                         </td>
