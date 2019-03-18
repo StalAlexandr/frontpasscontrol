@@ -5,6 +5,31 @@
 <script src="./js/controller.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+
+<script src="./js/lib/moment/moment.js"></script>
+<script src="./js/lib/angular-moment/angular-moment.js"></script>
+
+<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">
+
+<style type="text/css">
+    input {
+        width: 200px;
+        text-align: left
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+
+        $('#dtstartpass').datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#dtendpass').datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#dtstartpass').datepicker($.datepicker.regional["ru"]);
+        $('#dtendpass').datepicker($.datepicker.regional["ru"]);
+    });
+</script>
 <link rel="stylesheet" href="./css/main.css">
 
 
@@ -142,23 +167,22 @@
                                                         <td>
                                                             <span>С: </span>
                                                         </td>
-                                                        <md-content ng-app="MyApp" ng-controller="AppCtrl as ctrl" layout-padding layout-margin>
-                                                            <md-datepicker ng-model="ctrl.myDate" ng-change="ctrl.onDateChanged()"
-                                                                           md-placeholder="Enter date"></md-datepicker>
-                                                            Date: {{ctrl.myDate | date:shortDate}}
-                                                        </md-content>
                                                         <td>
+                                                            <div class="ui-widget">
+                                                                <label for="dtstartpass"></label><input
+                                                                    id="dtstartpass" ng-value="dtstartpass"/>
+                                                            </div>
                                                         </td>
-                                                    </tr>
                                                     <tr>
                                                         <td>
                                                             <span>По: </span>
                                                         </td>
-                                                        <td>
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
+                                                    <td>
+                                                        <div class="ui-widget">
+                                                            <label for="dtendpass"></label><input
+                                                                id="dtendpass" ng-value="dtendpass"/>
+                                                        </div>
+                                                    </td>
                                                     </tr>
                                                     <tr>
                                                         <td>

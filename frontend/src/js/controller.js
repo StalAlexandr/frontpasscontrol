@@ -1,5 +1,9 @@
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function ($scope, $http, $element) {
+
+
+var app = angular.module('myApp', ['angularMoment']);
+
+
+app.controller('myCtrl', function ($scope, $http) {
 
 
 
@@ -8,6 +12,13 @@ app.controller('myCtrl', function ($scope, $http, $element) {
 
     $scope.currentPerson = {};
 
+
+    $scope.currentDate =  new Date();
+    $scope.nextMonthDate =  moment($scope.currentDate).add(1, 'M');
+
+    $scope.dtstartpass = moment($scope.currentDate).format("DD/MM/YYYY");  //new Date().toISOString().slice(0, 10).replace(/-/g, '/');
+
+    $scope.dtendpass = moment($scope.nextMonthDate).format("DD/MM/YYYY");
 
     $scope.searchString = '';
 
