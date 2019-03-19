@@ -4,9 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import ru.maximumdance.passcontrol.model.Course;
+import ru.maximumdance.passcontrol.model.Lesson;
 import ru.maximumdance.passcontrol.model.Pass;
 import ru.maximumdance.passcontrol.model.Person;
 import ru.maximumdance.passcontrol.service.PersonService;
+
+import java.util.Date;
 
 @SpringBootApplication
 public class PasscontrolApplication {
@@ -29,18 +32,30 @@ public class PasscontrolApplication {
 		person2.setFirstName("Николай");
 		service.insert(person2);
 
-/*
-		Integer id = service.findByFirstName("Сталь").get(0).getId();
 
-		System.out.println("ID " +id);
+		Integer id = service.findByNameLike("Сталь").get(0).getId();
+
 		Pass pass = new Pass();
-	//	Course course = new Course();
-//		course.setName("LATINA");
-		pass.setCurrentItemCount(100);
+		Course course = new Course();
+		course.setName("LATINA");
 
-		service.addPass(id, pass);
-		System.out.println(service.findByFirstName("Сталь").get(0).getPasses().size());
-	*/
+		Long courceId = service.insertCource(course);
+		course.setId(courceId);
+
+		pass.setCurrentItemCount(100);
+		pass.setCourse(course);
+
+
+		Integer passId = service.addPass(id, pass);
+
+
+		Lesson lesson = new Lesson();
+		lesson.setCourse(course);
+		lesson.setDate( new java.sql.Date(System.currentTimeMillis()));
+
+		service.addLesson(passId,lesson);
+
+
 	}
 
 }

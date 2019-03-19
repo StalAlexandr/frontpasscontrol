@@ -1,6 +1,8 @@
 package ru.maximumdance.passcontrol.dao;
 
 import org.springframework.stereotype.Repository;
+import ru.maximumdance.passcontrol.model.Course;
+import ru.maximumdance.passcontrol.model.Lesson;
 import ru.maximumdance.passcontrol.model.Pass;
 import ru.maximumdance.passcontrol.model.Person;
 
@@ -25,7 +27,6 @@ public class PersonDAOImpl {
     }
 
     public void insert(Person person){
-        System.out.println(person);
         entityManager.persist(person);
     }
 
@@ -51,10 +52,28 @@ public class PersonDAOImpl {
         return entityManager.find(Person.class, id);
     };
 
-    public void addPass(Integer id, Pass pass){
+    public Pass findPassById(Integer id){
+        return entityManager.find(Pass.class, id);
+    };
+
+    public Course findCourceById(Integer id){
+        return entityManager.find(Course.class, id);
+    };
+
+    public Long insertCource(Course course){
+        entityManager.persist(course);
+        entityManager.flush();
+        return course.getId();
+    };
+
+
+
+    public Integer addPass(Integer id, Pass pass){
         Person person = findById(id);
         person.addPass(pass);
         entityManager.persist(pass);
+        entityManager.flush();
+        return pass.getId();
     }
 
     public Person find(Map<String,String> params) {
@@ -87,4 +106,12 @@ public class PersonDAOImpl {
         return typed.getResultList();
     }
 
+    public Long addLesson(Integer id, Lesson lesson) {
+
+        Pass pass = findPassById(id);
+        pass.addLesson(lesson);
+        entityManager.persist(pass);
+        entityManager.flush();
+        return lesson.getId();
+    }
 }

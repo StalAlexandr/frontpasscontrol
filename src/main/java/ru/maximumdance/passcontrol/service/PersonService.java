@@ -1,5 +1,7 @@
 package ru.maximumdance.passcontrol.service;
 
+import ru.maximumdance.passcontrol.model.Course;
+import ru.maximumdance.passcontrol.model.Lesson;
 import ru.maximumdance.passcontrol.model.Pass;
 import ru.maximumdance.passcontrol.model.Person;
 
@@ -16,9 +18,13 @@ public interface PersonService {
 
     Person findById(Integer id);
 
-    void addPass(Integer id, Pass pass);
+    Integer addPass(Integer id, Pass pass);
+
+    Long addLesson(Integer id, Lesson lesson);
 
     Person find(Map<String,String> params);
 
     List<Person>findByNameLike(String firstName);
+
+    Long insertCource(Course course);
 }

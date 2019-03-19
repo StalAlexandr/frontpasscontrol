@@ -13,7 +13,6 @@ public class StaticController {
 
         @RequestMapping(value = "/")
         public String somePg() {
-            System.out.println("hi");
             return "index.html";
         }
     }

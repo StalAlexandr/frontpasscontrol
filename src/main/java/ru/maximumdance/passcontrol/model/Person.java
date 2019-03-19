@@ -1,5 +1,7 @@
 package ru.maximumdance.passcontrol.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.*;
 

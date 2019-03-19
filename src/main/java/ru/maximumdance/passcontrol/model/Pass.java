@@ -1,5 +1,7 @@
 package ru.maximumdance.passcontrol.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -16,30 +18,38 @@ public class Pass {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     Course course;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
+
+    @JsonBackReference
+    private
     Person person;
 
     @Column
+    private
     Integer itemCount;
 
     @Column
+    private
     Integer currentItemCount;
 
     @Column
+    private
     Date launchDate;
 
     @Column
+    private
     Date terminateDate;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "pass_lessons",
             joinColumns = @JoinColumn(name = "pass_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
+    private
     Set<Lesson> lessons  = new HashSet<>();
 
     public Integer getId() {
