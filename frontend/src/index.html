@@ -20,6 +20,20 @@
         width: 200px;
         text-align: left
     }
+
+    select {
+        width: 250px; /* Ширина списка в пикселах */
+    }
+
+    .prokrutka {
+        height: 200px; /* высота нашего блока */
+        width: 300px; /* ширина нашего блока */
+        background: #fff; /* цвет фона, белый */
+        border: 1px solid #C1C1C1; /* размер и цвет границы блока */
+        overflow-x: scroll; /* прокрутка по горизонтали */
+        overflow-y: scroll; /* прокрутка по вертикали */
+    }
+
 </style>
 <script type="text/javascript">
     $(function () {
@@ -56,20 +70,31 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div ng-show="personList.length>0">
-                                                <select  size="5" ng-model="currentPerson">
-                                                    <option ng-click="select()" ng-repeat="person in personList" ng-value="person">{{person.firstName}}
+
+                                            <div class="prokrutka">
+                                                <table>
+                                                    <tr ng-repeat="person in personList">
+                                                        <td ng-click="onSelectPerson($event)" id="{{$index}}"> {{person.firstName}}
+                                                            {{person.lastName}} {{person.cardNumber}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+<!--
+                                            <div>
+                                                <select  size="5" ng-model="currentPerson" ng-show="personList.length>0" >
+                                                    <option ng-repeat="person in personList" ng-value="person">
+                                                        {{person.firstName}}
                                                         {{person.lastName}} {{person.cardNumber}}
                                                     </option>
                                                 </select>
                                             </div>
+                                       -->
                                         </td>
                                     </tr>
                                 </table>
 
                             </td>
 							<td>
-                                <div class=" user">
                                                     <table>
                                                         <button ng-click="updatePerson()" ng-disabled = "!validPerson()">Сохранить</button>
                                                         <button ng-click="addPerson()" ng-disabled = "!validPerson()">Создать</button>
@@ -120,15 +145,31 @@
 
 
                                                     <button ng-click="addUser()" ng-show="selectedUser.length>0">СОХРАНИТЬ</button><br>
-                                                    <div class = "localtitle">Абонименты:
-                                                        <div></div>
-                                                        <div></div>
-                                                    </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="user">
-                                                <table>
+                                <div class="localtitle">Абонименты:</div>
+                                <div class="prokrutka">
+                                    <table>
+                                        <th>Курс</th><th>Уроков</th><th>Осталось</th><th>Окончание</th>
+                                        <tr ng-repeat="pass in currentPerson.passes">
+                                            <td ng-click="onSelectPass($event)" id="{{$index}}">{{pass.course.name}}</td><td>{{pass.itemCount}}</td><td>{{pass.currentItemCount}}</td><td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <!--
+                                <select  size="5" class="form-control" ng-model="currentPass" ng-options="pass.itemCount for pass in currentPerson.passes" ></select>
+
+                                <select size="5" ng-model="currentPass" ng-show="currentPerson.passes.length>0" ng-init="">
+                                    <option ng-repeat="pass in currentPerson.passes" ng-value="pass" ng-show="false" >
+                                        {{pass.course.name}}
+                                        {{pass.itemCount}} ( {{pass.currentItemCount}} )
+                                    </option>
+                                </select>
+                                -->
+
+                            </td>
+
+                            <td valign="top">
+                                    <table>
                                                     <tr>
                                                         <td>
                                                             <span>Курс: </span>
@@ -192,17 +233,11 @@
                                                             <button ng-click="addPass()">Добавить</button>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                    </tr>
 
-
-
-                                                </table>
-
-                                            </div>
-                                        </td>
+                                    </table>
+                                </td>
                        </tr>
-				       <tr>
+                        <tr valign="top">
 						    <td>
 								<button ng-click="addWorkout()" ng-show="selectedUser.length>0">Списать занятие: </button> Курс Дата Время<br> 
                                 <div class="usrsearch">

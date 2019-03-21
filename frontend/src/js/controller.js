@@ -10,7 +10,8 @@ app.controller('myCtrl', function ($scope, $http) {
 
     $scope.personList = [];
 
-    $scope.currentPerson = {};
+    $scope.currentPerson={};
+    $scope.currentPass={};
 
 
     $scope.currentDate =  new Date();
@@ -82,8 +83,19 @@ app.controller('myCtrl', function ($scope, $http) {
         $http.post('http://localhost:8080/persons/', JSON.stringify($scope.currentPerson ), {headers: headers});
 
 
-    }
+    };
+
+    $scope.onSelectPass = function(event){
+        $scope.currentPass= $scope.currentPerson.passes[$(event.target).attr("id")];
+    };
+
+
+    $scope.onSelectPass = function(event){
+        $scope.currentPass= $scope.currentPerson.passes[$(event.target).attr("id")];
+    };
+
     $scope.validPerson = function() {
+
        return (($scope.currentPerson.cardNumber)&&($scope.currentPerson.lastName)&&($scope.currentPerson.cardNumber.length > 0)&&($scope.currentPerson.lastName.length>0));
     }
 });
