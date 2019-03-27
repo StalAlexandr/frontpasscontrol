@@ -5,9 +5,6 @@ var app = angular.module('myApp', ['angularMoment']);
 
 app.controller('myCtrl', function ($scope, $http) {
 
-
-
-
     $scope.personList = [];
 
     $scope.currentPerson={};
@@ -18,6 +15,8 @@ app.controller('myCtrl', function ($scope, $http) {
     $scope.nextMonthDate =  moment($scope.currentDate).add(1, 'M');
 
     $scope.dtstartpass = moment($scope.currentDate).format("DD/MM/YYYY");  //new Date().toISOString().slice(0, 10).replace(/-/g, '/');
+
+    $scope.dtlesson = moment($scope.currentDate).format("DD/MM/YYYY");
 
     $scope.dtendpass = moment($scope.nextMonthDate).format("DD/MM/YYYY");
 
@@ -68,11 +67,28 @@ app.controller('myCtrl', function ($scope, $http) {
         });
     };
 
-    $scope.updatePerson = function(){
+    $scope.newPerson = function() {
+        $scope.currentPerson = {};
+    };
 
+    $scope.savePerson = function() {
+        if ($scope.currentPerson.id) {
+            $scope.updatePerson();
+        } else {
+            $scope.addPerson();
+        }
+
+    };
+
+    $scope.updatePerson = function() {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        $http.put('http://localhost:8080/persons/', JSON.stringify($scope.currentPerson ), {headers: headers});
+        $http.put('http://localhost:8080/persons/', JSON.stringify($scope.currentPerson ), {headers: headers}).then(
+            function(response) {
+            },
+            function(data) {
+                alert("Не удалось сохранить. Скорее всего карточка с таким номером уже есть в системе");
+            });
     };
 
     $scope.addPerson = function(){
@@ -80,23 +96,34 @@ app.controller('myCtrl', function ($scope, $http) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         $scope.currentPerson.id='';
-        $http.post('http://localhost:8080/persons/', JSON.stringify($scope.currentPerson ), {headers: headers});
-
+        $http.post('http://localhost:8080/persons/', JSON.stringify($scope.currentPerson ), {headers: headers}).then(
+            function(response) {
+            },
+            function(data) {
+                alert("Не удалось сохранить. Скорее всего карточка с таким номером уже есть в системе");
+            });
 
     };
 
-    $scope.onSelectPass = function(event){
-        $scope.currentPass= $scope.currentPerson.passes[$(event.target).attr("id")];
+    $scope.onSelectPerson = function(event){
+        $scope.currentPerson= $scope.personList[$(event.target).attr("id")];
     };
 
 
-    $scope.onSelectPass = function(event){
-        $scope.currentPass= $scope.currentPerson.passes[$(event.target).attr("id")];
+    $scope.onSelectPass = function(event) {
+        $scope.currentPass = $scope.currentPerson.passes[$(event.target).attr("id")];
     };
 
     $scope.validPerson = function() {
+       return (($scope.currentPerson.cardNumber));
+    };
 
-       return (($scope.currentPerson.cardNumber)&&($scope.currentPerson.lastName)&&($scope.currentPerson.cardNumber.length > 0)&&($scope.currentPerson.lastName.length>0));
+    $scope.validateRmLesson = function() {
+        return true;
+    };
+
+    $scope.validateRmPass = function() {
+        return true;
     }
 });
 

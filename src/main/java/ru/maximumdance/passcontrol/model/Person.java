@@ -14,7 +14,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column
+    @Column(unique = true)
     Integer cardNumber;
 
     @Column
@@ -42,6 +42,9 @@ public class Person {
             fetch = FetchType.EAGER,
             mappedBy = "person")
     List<Pass> passes = new ArrayList<>();
+
+   // @Version
+   // private Long version;
 
 
     public Integer getId() {

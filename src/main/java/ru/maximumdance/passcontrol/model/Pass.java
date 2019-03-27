@@ -82,6 +82,7 @@ public class Pass {
 
     public void setItemCount(Integer itemCount) {
         this.itemCount = itemCount;
+        this.setCurrentItemCount(itemCount);
     }
 
     public Integer getCurrentItemCount() {

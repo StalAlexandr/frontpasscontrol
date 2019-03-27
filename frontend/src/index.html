@@ -30,7 +30,6 @@
         width: 300px; /* ширина нашего блока */
         background: #fff; /* цвет фона, белый */
         border: 1px solid #C1C1C1; /* размер и цвет границы блока */
-        overflow-x: scroll; /* прокрутка по горизонтали */
         overflow-y: scroll; /* прокрутка по вертикали */
     }
 
@@ -40,8 +39,11 @@
 
         $('#dtstartpass').datepicker({ dateFormat: 'dd/mm/yy' });
         $('#dtendpass').datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#dtlesson').datepicker({dateFormat: 'dd/mm/yy'});
+
         $('#dtstartpass').datepicker($.datepicker.regional["ru"]);
         $('#dtendpass').datepicker($.datepicker.regional["ru"]);
+        $('#dtlesson').datepicker($.datepicker.regional["ru"]);
     });
 </script>
 <link rel="stylesheet" href="./css/main.css">
@@ -79,72 +81,14 @@
                                                     </tr>
                                                 </table>
                                             </div>
-<!--
-                                            <div>
-                                                <select  size="5" ng-model="currentPerson" ng-show="personList.length>0" >
-                                                    <option ng-repeat="person in personList" ng-value="person">
-                                                        {{person.firstName}}
-                                                        {{person.lastName}} {{person.cardNumber}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                       -->
+
                                         </td>
                                     </tr>
                                 </table>
 
                             </td>
-							<td>
-                                                    <table>
-                                                        <button ng-click="updatePerson()" ng-disabled = "!validPerson()">Сохранить</button>
-                                                        <button ng-click="addPerson()" ng-disabled = "!validPerson()">Создать</button>
-                                                        <tr>
-                                                            <td><span>Карточка: </span></td>
-                                                            <td><input placeholder="Карточка" ng-model="currentPerson.cardNumber" size="30"></td>
-                                                        </tr>
 
-                                                        <!--
-                                                        <tr>
-                                                            <td><span>id: </span></td>
-                                                            <td><input placeholder="id" ng-model="currentPerson.id" size="30"></td>
-                                                        </tr>
-                                                        -->
-                                                        <tr>
-                                                            <td><span>Фамилия: </span></td>
-                                                            <td><input placeholder="Фамилия" ng-model="currentPerson.lastName" size="30"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span>Имя: </span></td>
-                                                            <td><input placeholder="Имя" ng-model="currentPerson.firstName" size="30"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span>Отчество: </span></td>
-                                                            <td><input placeholder="Отчество" ng-model="currentPerson.midName" size="30"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span>Телефон: </span></td>
-                                                            <td><input placeholder="Телефон" ng-model="currentPerson.phoneNumber" size="30"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span>Комментарий: </span></td>
-                                                            <td><input placeholder="Комментарий" ng-model="currentPerson.comment" size="30"></td>
-                                                        </tr>
-                                                        <!--
-                                                        <tr>
-                                                            <td><span>Дата рождения: </span></td>
-                                                            <td><input placeholder="Дата рождения" ng-model="currentPerson.birthDate" size="30"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span>Дата регистрации: </span></td>
-                                                            <td><input placeholder="Дата регистрации" ng-model="currentPerson.regDate" size="30"></td>
-                                                        </tr>
-                                                        -->
-
-
-                                                    </table>
-
-
-                                                    <button ng-click="addUser()" ng-show="selectedUser.length>0">СОХРАНИТЬ</button><br>
+                            <td valign="top">
                                 <div class="localtitle">Абонименты:</div>
                                 <div class="prokrutka">
                                     <table>
@@ -154,18 +98,6 @@
                                         </tr>
                                     </table>
                                 </div>
-
-                                <!--
-                                <select  size="5" class="form-control" ng-model="currentPass" ng-options="pass.itemCount for pass in currentPerson.passes" ></select>
-
-                                <select size="5" ng-model="currentPass" ng-show="currentPerson.passes.length>0" ng-init="">
-                                    <option ng-repeat="pass in currentPerson.passes" ng-value="pass" ng-show="false" >
-                                        {{pass.course.name}}
-                                        {{pass.itemCount}} ( {{pass.currentItemCount}} )
-                                    </option>
-                                </select>
-                                -->
-
                             </td>
 
                             <td valign="top">
@@ -181,6 +113,7 @@
                                                                 <option>БОДИАРТ</option>
                                                                 <option>ЙОГА</option>
                                                                 <option>ТАНГО</option>
+                                                                <option>МАНЬЯК</option>
                                                             </select>
                                                         </td>
                                                     </tr>
@@ -198,7 +131,7 @@
                                                                 <option>8</option>
                                                                 <option>12</option>
                                                                 <option>16</option>
-                                                                <option>БЕЗЛИМИТ</option>
+                                                                <option>МАНЬЯК</option>
                                                             </select>
                                                         </td>
                                                     </tr>
@@ -227,30 +160,138 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <span>Добавить: </span>
+                                                            <span></span>
                                                         </td>
                                                         <td>
-                                                            <button ng-click="addPass()">Добавить</button>
+                                                            <button ng-click="addPass()">Новый абонимент</button>
                                                         </td>
                                                     </tr>
-
+                                        <tr>
+                                            <td>
+                                                <span></span>
+                                            </td>
+                                            <td>
+                                                <button ng-click="" ng-disabled="validateRmPass">Удалить</button>
+                                            </td>
+                                        </tr>
                                     </table>
+
                                 </td>
                        </tr>
-                        <tr valign="top">
-						    <td>
-								<button ng-click="addWorkout()" ng-show="selectedUser.length>0">Списать занятие: </button> Курс Дата Время<br> 
-                                <div class="usrsearch">
-                                   История посещений:
-                                </div>
-									<button ng-click="addUser()" ng-show="selectedUser.length>0">СТЕРЕТЬ АБОНИМЕНТ</button><br>
-                            </td>
-	       			   </tr>
-                       
-                  
-                  </table>
-</div>
-        
 
+
+                        <tr>
+
+                            <td valign="top">
+                                <table>
+                                    <button ng-click="newPerson()">Новый</button>
+                                    <button ng-click="savePerson()" ng-disabled="!validPerson()">Сохранить</button>
+                                    <tr>
+                                        <td><span>Карточка: </span></td>
+                                        <td><input placeholder="Карточка" ng-model="currentPerson.cardNumber" size="30">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><span>Фамилия: </span></td>
+                                        <td><input placeholder="Фамилия" ng-model="currentPerson.lastName" size="30">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Имя: </span></td>
+                                        <td><input placeholder="Имя" ng-model="currentPerson.firstName" size="30"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Отчество: </span></td>
+                                        <td><input placeholder="Отчество" ng-model="currentPerson.midName" size="30">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Телефон: </span></td>
+                                        <td><input placeholder="Телефон" ng-model="currentPerson.phoneNumber" size="30">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Комментарий: </span></td>
+                                        <td><input placeholder="Комментарий" ng-model="currentPerson.comment" size="30">
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </td>
+                            <td valign="top">
+                                <div class="localtitle">Занятия:</div>
+                                <div class="prokrutka">
+                                    <table>
+                                        <tr ng-repeat="lesson in currentPass.lessons">
+                                            <td ng-click="onSelectLesson($event)" id="{{$index}}">
+                                                {{lesson.date |date: "yyyy/dd/MM"}} {{lesson.course.name}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                            <td valign="top">
+
+                                <table>
+
+
+                                    <tr>
+                                        <td>
+                                            <span></span>
+                                        </td>
+                                        <td>
+                                            <select size="1">
+                                                <option>ЛАТИНА</option>
+                                                <option>БАЗОВЫЙ</option>
+                                                <option>БОДИАРТ</option>
+                                                <option>ЙОГА</option>
+                                                <option>ТАНГО</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <span></span>
+                                        </td>
+                                        <td>
+                                            <div class="ui-widget">
+                                                <label for="dtlesson"></label><input
+                                                    id="dtlesson" ng-value="dtlesson"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <span></span>
+                                        </td>
+
+                                        <td>
+                                            <button ng-click="addPass()">Списать занятие</button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span></span>
+                                        </td>
+                                        <td>
+                                            <button ng-click="" ng-disabled="validateRmLesson()">Отменить</button>
+                                        </td>
+                                    </tr>
+
+                                    </td>
+                                    </tr>
+
+
+                                </table>
+
+                            </td>
+                        </tr>
+                    </table>
+</div>
 </body>
 </html>
