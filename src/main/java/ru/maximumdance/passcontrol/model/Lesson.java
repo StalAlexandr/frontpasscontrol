@@ -1,6 +1,7 @@
 package ru.maximumdance.passcontrol.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +21,7 @@ public class Lesson {
     Course course;
 
     @Column
+    @JsonFormat(pattern="dd/MM/yyyy")
     Date date;
 
     @JsonBackReference

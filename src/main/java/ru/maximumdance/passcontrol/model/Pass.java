@@ -1,6 +1,7 @@
 package ru.maximumdance.passcontrol.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.OnDelete;
@@ -38,10 +39,12 @@ public class Pass {
     Integer currentItemCount;
 
     @Column
+    @JsonFormat(pattern="dd/MM/yyyy")
     private
     Date launchDate;
 
     @Column
+    @JsonFormat(pattern="dd/MM/yyyy")
     private
     Date terminateDate;
 

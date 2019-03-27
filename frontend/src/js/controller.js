@@ -13,17 +13,26 @@ app.controller('myCtrl', function ($scope, $http) {
 
     $scope.lessonsList = [];
 
+    $scope.newPass = {};
+
     $scope.currentDate =  new Date();
     $scope.nextMonthDate =  moment($scope.currentDate).add(1, 'M');
 
-    $scope.dtstartpass = moment($scope.currentDate).format("DD/MM/YYYY");
-    $scope.dtendpass = moment($scope.nextMonthDate).format("DD/MM/YYYY");
+    $scope.newPass.launchDate = moment($scope.currentDate).format("DD/MM/YYYY");
+    $scope.newPass.terminateDate = moment($scope.nextMonthDate).format("DD/MM/YYYY");
 
     $scope.dtlesson = moment($scope.currentDate).format("DD/MM/YYYY");
 
     $scope.searchString = '';
 
 
+    $scope.currentPass;
+
+    $scope.courses = [
+        { id: 1, name: 'Латина' },
+        { id: 2, name: 'Базовый' },
+        { id: 3, name: 'Танго' }
+    ];
 
     $scope.init = function () { };
 
@@ -154,5 +163,21 @@ app.controller('myCtrl', function ($scope, $http) {
     $scope.validateRmPass = function() {
         return true;
     }
+
+    $scope.addPass = function() {
+
+
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        $http.put('http://localhost:8080/persons/'+$scope.currentPerson.id+"/pass", JSON.stringify($scope.newPass ), {headers: headers}).then(
+            function(response) {
+                $scope.findPasses();
+            },
+            function(data) {
+                alert("Не удалось сохранить абонимент");
+            });
+
+    };
+
 });
 
