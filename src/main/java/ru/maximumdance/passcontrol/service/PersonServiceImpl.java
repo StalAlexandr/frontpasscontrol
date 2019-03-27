@@ -12,6 +12,7 @@ import ru.maximumdance.passcontrol.model.Person;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Transactional
 @Service
@@ -19,7 +20,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonDAOImpl personDAO;
-
 
     @Override
     public void insert(Person person) {
@@ -32,25 +32,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public void delete(Person person){
+        personDAO.delete(person);
+    }
+
+    @Override
     public List<Person> getAll() {
         return personDAO.getAll();
-    }
-
-
-    @Override
-    public Person findById(Integer id) {
-        return personDAO.findById(id);
-    }
-
-    @Override
-    public Integer addPass(Integer id, Pass pass) {
-        return personDAO.addPass(id,pass);
-    }
-
-
-    @Override
-    public Long  addLesson(Integer id, Lesson lesson) {
-        return personDAO.addLesson(id,lesson);
     }
 
     @Override
@@ -59,14 +47,56 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person findById(Integer id) {
+        return personDAO.findById(id);
+    }
+
+    @Override
     public List<Person>findByNameLike(String firstName) {
         return personDAO.findByNameLike(firstName);
     }
 
     @Override
-    public Long insertCource(Course course) {
-        return personDAO.insertCource(course);
+    public Pass findPassById(Integer id){
+        return personDAO.findPassById(id);
     }
+
+    @Override
+    public Set<Pass> findPersonPasses(Integer id){
+        return personDAO.findPersonPasses(id);
+    }
+
+    @Override
+    public Integer addPass(Integer id, Pass pass) {
+        return personDAO.addPass(id,pass);
+    }
+
+    @Override
+    public void update(Pass pass) {
+         personDAO.update(pass);
+    }
+
+
+    @Override
+    public Lesson findLessonById(Integer id){
+        return personDAO.findLessonById(id);
+    }
+
+    @Override
+    public Set<Lesson> findPassLessons(Integer id){
+        return personDAO.findPassLessons(id);
+    }
+
+    @Override
+    public Long  addLesson(Integer id, Lesson lesson) {
+        return personDAO.addLesson(id,lesson);
+    }
+
+    @Override
+    public Long insertCourse(Course course) {
+        return personDAO.insertCourse(course);
+    }
+
 
 
 }

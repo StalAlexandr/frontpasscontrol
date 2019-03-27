@@ -25,30 +25,34 @@ public class PasscontrolApplication {
 		person.setFirstName("Александр");
 		service.insert(person);
 
-/*
+
+        Pass pass = new Pass();
+        Course course = new Course();
+        course.setName("Латина");
+
+        Long courceId = service.insertCourse(course);
+        course.setId(courceId);
+
+        pass.setItemCount(8);
+        pass.setCourse(course);
+
+        person.addPass(pass);
+
+
+        Integer id = service.findByNameLike("Сталь").get(0).getId();
+        Integer passId = service.addPass(id, pass);
+
+
+
 		Person person2 = new Person();
+
+        person2.setId(id);
+
 		person2.setLastName("Сталь");
 		person2.setCardNumber(321);
 		person2.setFirstName("Николай");
-		service.insert(person2);
-*/
 
-		Integer id = service.findByNameLike("Сталь").get(0).getId();
-
-		Pass pass = new Pass();
-		Course course = new Course();
-		course.setName("Латина");
-
-		Long courceId = service.insertCource(course);
-		course.setId(courceId);
-
-		pass.setItemCount(8);
-		pass.setCourse(course);
-
-		person.addPass(pass);
-
-
-		Integer passId = service.addPass(id, pass);
+		service.update(person2);
 
 
 		Lesson lesson = new Lesson();

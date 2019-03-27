@@ -7,6 +7,7 @@ import ru.maximumdance.passcontrol.model.Person;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface PersonService {
 
@@ -14,11 +15,21 @@ public interface PersonService {
 
     void update(Person person);
 
+    void delete(Person person);
+
     List<Person> getAll();
 
     Person findById(Integer id);
 
+    Pass findPassById(Integer id);
+
+    Set<Pass> findPersonPasses(Integer id);
+
     Integer addPass(Integer id, Pass pass);
+
+    Lesson findLessonById(Integer id);
+
+    Set<Lesson> findPassLessons(Integer id);
 
     Long addLesson(Integer id, Lesson lesson);
 
@@ -26,5 +37,7 @@ public interface PersonService {
 
     List<Person>findByNameLike(String firstName);
 
-    Long insertCource(Course course);
+    Long insertCourse(Course course);
+
+    void update(Pass pass);
 }

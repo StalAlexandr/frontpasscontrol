@@ -1,6 +1,7 @@
 package ru.maximumdance.passcontrol.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.*;
@@ -38,14 +39,12 @@ public class Person {
     @Column
     Date regDate;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             mappedBy = "person")
-    List<Pass> passes = new ArrayList<>();
 
-   // @Version
-   // private Long version;
-
+    Set<Pass> passes = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -119,11 +118,11 @@ public class Person {
         this.regDate = regDate;
     }
 
-    public List<Pass> getPasses() {
+    public Set<Pass> getPasses() {
         return passes;
     }
 
-    public void setPasses(List<Pass> passes) {
+    public void setPasses(Set<Pass> passes) {
         this.passes = passes;
     }
 

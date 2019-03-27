@@ -93,7 +93,7 @@
                                 <div class="prokrutka">
                                     <table>
                                         <th>Курс</th><th>Уроков</th><th>Осталось</th><th>Окончание</th>
-                                        <tr ng-repeat="pass in currentPerson.passes">
+                                        <tr ng-repeat="pass in passList">
                                             <td ng-click="onSelectPass($event)" id="{{$index}}">{{pass.course.name}}</td><td>{{pass.itemCount}}</td><td>{{pass.currentItemCount}}</td><td></td>
                                         </tr>
                                     </table>
@@ -224,7 +224,7 @@
                                 <div class="localtitle">Занятия:</div>
                                 <div class="prokrutka">
                                     <table>
-                                        <tr ng-repeat="lesson in currentPass.lessons">
+                                        <tr ng-repeat="lesson in lessonsList">
                                             <td ng-click="onSelectLesson($event)" id="{{$index}}">
                                                 {{lesson.date |date: "yyyy/dd/MM"}} {{lesson.course.name}}
                                             </td>

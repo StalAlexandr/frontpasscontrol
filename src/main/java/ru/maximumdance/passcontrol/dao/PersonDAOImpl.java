@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Repository
 public class PersonDAOImpl {
@@ -48,34 +49,6 @@ public class PersonDAOImpl {
         return allQuery.getResultList();
     }
 
-    public Person findById(Integer id){
-        return entityManager.find(Person.class, id);
-    };
-
-    public Pass findPassById(Integer id){
-        return entityManager.find(Pass.class, id);
-    };
-
-    public Course findCourceById(Integer id){
-        return entityManager.find(Course.class, id);
-    };
-
-    public Long insertCource(Course course){
-        entityManager.persist(course);
-        entityManager.flush();
-        return course.getId();
-    };
-
-
-
-    public Integer addPass(Integer id, Pass pass){
-        Person person = findById(id);
-        person.addPass(pass);
-        entityManager.persist(pass);
-        entityManager.flush();
-        return pass.getId();
-    }
-
     public Person find(Map<String,String> params) {
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -92,6 +65,10 @@ public class PersonDAOImpl {
         }
     }
 
+    public Person findById(Integer id){
+        return entityManager.find(Person.class, id);
+    };
+
     public List<Person> findByNameLike(String name) {
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -106,6 +83,37 @@ public class PersonDAOImpl {
         return typed.getResultList();
     }
 
+    /* pass */
+
+    public Pass findPassById(Integer id){
+        return entityManager.find(Pass.class, id);
+    };
+
+    public Set<Pass> findPersonPasses(Integer id){
+        return entityManager.find(Person.class, id).getPasses();
+    }
+
+    public Integer addPass(Integer id, Pass pass){
+        Person person = findById(id);
+        person.addPass(pass);
+        entityManager.persist(pass);
+        entityManager.flush();
+        return pass.getId();
+    }
+
+    public void update(Pass pass) {
+        entityManager.merge(pass);
+    }
+
+    /* lessons */
+    public Lesson findLessonById(Integer id){
+        return entityManager.find(Lesson.class, id);
+    };
+
+    public Set<Lesson> findPassLessons(Integer id){
+        return entityManager.find(Pass.class, id).getLessons();
+    }
+
     public Long addLesson(Integer id, Lesson lesson) {
 
         Pass pass = findPassById(id);
@@ -114,4 +122,15 @@ public class PersonDAOImpl {
         entityManager.flush();
         return lesson.getId();
     }
+
+    /* course */
+
+    public Long insertCourse(Course course){
+        entityManager.persist(course);
+        entityManager.flush();
+        return course.getId();
+    };
+
+
+
 }
